@@ -111,3 +111,18 @@ Feature: Ejercicio Clase 4
       And match $.name == 'Emiliano'
       And match $.job == 'Ingeniero'
       And match $.updatedAt == "#notnull"
+
+  Scenario: Caso 9 - Borrar
+    * def id = 2
+    Given url 'https://reqres.in'
+    And path '/api/users/' + id
+    When method delete
+    Then status 204
+
+  Scenario: Caso 10 - Login Unsuccessful
+    Given url 'https://reqres.in'
+    And path '/api/login'
+    And form field email = "peter@klaven"
+    When method post
+    Then status 400
+    And match $.error == "Missing password"
