@@ -64,23 +64,6 @@ Feature: Ejercicio Clase 4
     And match $.job == 'Ingeniero'
 
   Scenario: Caso 5 - Crear un usuario con archivo json
-    * def body =
-    """
-    {
-      "name": "Emiliano",
-      "job": "Ingeniero"
-    }
-    """
-    Given url 'https://reqres.in'
-    And path '/api/users'
-    And request body
-    When method post
-    Then status 201
-    * print response
-    And match $.name == 'Emiliano'
-    And match $.job == 'Ingeniero'
-
-  Scenario: Caso 6 - Crear un usuario con archivo json
     Given url 'https://reqres.in'
     And path '/api/users'
     And request read("bodyUser.json")
@@ -90,7 +73,7 @@ Feature: Ejercicio Clase 4
     And match $.name == 'Emiliano'
     And match $.job == 'Ingeniero'
 
-    Scenario: Caso 7 - Login
+    Scenario: Caso 6 - Login
       Given url 'https://reqres.in'
       And path '/api/login'
       And form field email = "eve.holt@reqres.in"
@@ -100,7 +83,7 @@ Feature: Ejercicio Clase 4
       * print response
       And match $.token == "#notnull"
 
-    Scenario: Caso 8 - Actualizar
+    Scenario: Caso 7 - Actualizar
       * def id = 2
       Given url 'https://reqres.in'
       And path '/api/users/' + id
@@ -112,14 +95,14 @@ Feature: Ejercicio Clase 4
       And match $.job == 'Ingeniero'
       And match $.updatedAt == "#notnull"
 
-  Scenario: Caso 9 - Borrar
+  Scenario: Caso 8 - Borrar
     * def id = 2
     Given url 'https://reqres.in'
     And path '/api/users/' + id
     When method delete
     Then status 204
 
-  Scenario: Caso 10 - Login Unsuccessful
+  Scenario: Caso 9 - Login Unsuccessful
     Given url 'https://reqres.in'
     And path '/api/login'
     And form field email = "peter@klaven"
